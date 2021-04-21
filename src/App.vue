@@ -1,28 +1,26 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <transition :name="transitionName">
       <router-view class="router-view" />
     </transition>
+    <nav-bar></nav-bar>
   </div>
 </template>
-
 <script>
+import navBar from "@/components/NavBar";
 export default {
   data() {
     return {
       transitionName: "slide-left",
     };
   },
+  components: {
+    navBar,
+  },
   watch: {
     $route(to, from) {
-      // 由主级到次级
-      // to.meta 能取到 route 路由参数中的 meta 属性
+      // 有主级到次级
       if (to.meta.index > from.meta.index) {
-        // 通过改变变量名称控制左右滑动
         this.transitionName = "slide-left"; // 向左滑动
       } else if (to.meta.index < from.meta.index) {
         // 由次级到主级
@@ -34,9 +32,7 @@ export default {
   },
 };
 </script>
-
 <style lang="less">
-@import "./common/style/mixin";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
