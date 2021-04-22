@@ -1,10 +1,11 @@
 <template>
   <header class="simple-header">
-    <i class="nbicon nbfanhui" @click="goBack"></i>
+    <i class="iconfont icon-back" @click="goBack"></i>
     <div class="simple-header-title">{{ title }}</div>
-    <i class="nbicon nbmore"></i>
+    <i class="iconfont icon-more"></i>
   </header>
 </template>
+
 <script>
 export default {
   // 外部传入的 title 属性，可以定义类型和默认值
@@ -22,6 +23,7 @@ export default {
   },
 };
 </script>
+
 <style lang="less" scoped>
 @import "../common/style/mixin";
 .simple-header {

@@ -1,7 +1,14 @@
-// Login.vue
 <template>
   <div class="login">
-    <img class="logo" src="//s.weituibao.com/1582958061265/mlogo.png" alt="" />
+    <s-header
+      :name="type == 'login' ? '登录' : '注册'"
+      :back="'/home'"
+    ></s-header>
+    <img
+      class="logo"
+      src="//s.weituibao.com/1591183219275/200181591183191_.pic.jpg"
+      alt=""
+    />
     <div v-if="type == 'login'" class="login-body login">
       <van-form @submit="onSubmit">
         <van-field
@@ -32,11 +39,12 @@
           ></Verify>
         </div>
         <div style="margin: 16px;">
+          <div class="link-register" @click="toggle('register')">立即注册</div>
           <van-button
             round
             block
             type="info"
-            color="#1baeae"
+            color="#c40000"
             native-type="submit"
             >登录</van-button
           >
@@ -62,7 +70,7 @@
         />
         <div class="verify">
           <Verify
-            ref="registerVerifyRef"
+            ref="loginVerifyRef"
             @error="error"
             :showButton="false"
             @success="success"
@@ -78,7 +86,7 @@
             round
             block
             type="info"
-            color="#1baeae"
+            color="#c40000"
             native-type="submit"
             >注册</van-button
           >
@@ -89,10 +97,9 @@
 </template>
 
 <script>
-// 添加登录和注册接口
+import sHeader from "@/components/SimpleHeader";
 import { login, register } from "../service/user";
-// 本地存储函数
-import { setLocal, getLocal } from "@/common/js/utils";
+import { setLocal } from "@/common/js/utils";
 import { Toast } from "vant";
 import Verify from "vue2-verify";
 export default {
@@ -103,14 +110,14 @@ export default {
       username1: "",
       password1: "",
       type: "login",
-      verify: false, // 此变量判断验证码输入是否正确
+      verify: false,
     };
   },
   components: {
-    Verify, // 记得验证码组件是需要注册的，否则直接使用会报错
+    sHeader,
+    Verify,
   },
   methods: {
-    // 执行验证码
     dealTriVer() {
       this.$refs.loginVerifyRef.$refs.instance.checkCode();
     },
@@ -119,7 +126,6 @@ export default {
       this.type = v;
     },
     async onSubmit(values) {
-      // 每次提交之前都要执行一次验证码，获取 verify 的最新值
       this.dealTriVer();
       if (!this.verify) {
         Toast.fail("验证码未填或填写错误!");
@@ -141,28 +147,32 @@ export default {
         this.type = "login";
       }
     },
-    // Verify 组件验证成功的回调
     success(obj) {
       this.verify = true;
+      // 回调之后，刷新验证码
+      obj.refresh();
     },
-    // Verify 组件验证失败的回调
     error(obj) {
       this.verify = false;
+      // 回调之后，刷新验证码
+      obj.refresh();
     },
   },
 };
 </script>
 
 <style lang="less">
+@import "../common/style/mixin";
 .login {
   .logo {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    // height: 120px;
     display: block;
     margin: 80px auto 0px;
   }
   .login-body {
     padding: 0 20px;
+    margin-top: 20px;
   }
   .login {
     .link-register {
@@ -183,10 +193,10 @@ export default {
   .verify-bar-area {
     margin-top: 24px;
     .verify-left-bar {
-      border-color: #1baeae;
+      border-color: #c40000;
     }
     .verify-move-block {
-      background-color: #1baeae;
+      background-color: #c40000;
       color: #fff;
     }
   }
