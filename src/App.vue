@@ -3,15 +3,18 @@
     <transition :name="transitionName">
       <router-view class="router-view" />
     </transition>
-    <nav-bar></nav-bar>
+    <nav-bar v-if="isShowNav"></nav-bar>
   </div>
 </template>
+
 <script>
 import navBar from "@/components/NavBar";
 export default {
   data() {
     return {
       transitionName: "slide-left",
+      isShowNav: true,
+      ShowMenuList: ["/", "/home", "/category", "/cart", "/user"],
     };
   },
   components: {
@@ -19,7 +22,13 @@ export default {
   },
   watch: {
     $route(to, from) {
-      // 有主级到次级
+      // 主级到次级
+      console.log(this.ShowMenuList);
+      if (this.ShowMenuList.includes(to.path)) {
+        this.isShowNav = true;
+      } else {
+        this.isShowNav = false;
+      }
       if (to.meta.index > from.meta.index) {
         this.transitionName = "slide-left"; // 向左滑动
       } else if (to.meta.index < from.meta.index) {
@@ -32,6 +41,7 @@ export default {
   },
 };
 </script>
+
 <style lang="less">
 @import "./common/style/mixin";
 #app {

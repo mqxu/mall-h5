@@ -43,6 +43,14 @@ export default {
     // 赋值给 user
     this.user = data;
   },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
+    goTo(r) {
+      this.$router.push({ path: r });
+    },
+  },
 };
 </script>
 

@@ -1,5 +1,9 @@
 import axios from 'axios'
 import { Toast } from 'vant'
+// axios.defaults.baseURL =
+//     process.env.NODE_ENV == 'development'
+//         ? '//localhost:8080/api/v1'
+//         : '//localhost:8080/api/v1'
 
 axios.defaults.baseURL =
     process.env.NODE_ENV == 'development'
