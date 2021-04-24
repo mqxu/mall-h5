@@ -2,7 +2,7 @@
   <div class="home">
     <header class="home-header wrap">
       <router-link tag="i" to="./category"
-        ><i class="nbicon nbmenu2"></i
+        ><i class="iconfont icon-menu"></i
       ></router-link>
       <div class="header-search">
         <span class="app-name">楼楼商城</span>
@@ -19,6 +19,13 @@
       </router-link>
     </header>
     <swiper :list="swiperList"></swiper>
+    <!-- 分类栏目 -->
+    <div class="category-list">
+      <div v-for="item in categoryList" v-bind:key="item.categoryId">
+        <img :src="require('../assets/' + item.imgUrl)" />
+        <span>{{ item.name }}</span>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -32,6 +39,58 @@ export default {
     return {
       isLogin: false,
       swiperList: [],
+      categoryList: [
+        {
+          name: "楼楼交友",
+          imgUrl: "jiaoyou.png",
+          categoryId: 100001,
+        },
+        {
+          name: "楼楼家政",
+          imgUrl: "jiazheng.png",
+          categoryId: 100003,
+        },
+        {
+          name: "楼楼水产",
+          imgUrl: "shuichan1.png",
+          categoryId: 100002,
+        },
+        {
+          name: "楼楼租车",
+          imgUrl: "zuche.png",
+          categoryId: 100004,
+        },
+        {
+          name: "楼楼招聘",
+          imgUrl: "pin.png",
+          categoryId: 100005,
+        },
+        {
+          name: "楼楼二手",
+          imgUrl: "ershou.png",
+          categoryId: 100006,
+        },
+        {
+          name: "楼楼宠物",
+          imgUrl: "chongwu.png",
+          categoryId: 100007,
+        },
+        {
+          name: "楼楼外卖",
+          imgUrl: "wm.png",
+          categoryId: 100008,
+        },
+        {
+          name: "楼楼电器",
+          imgUrl: "dianqi.png",
+          categoryId: 100009,
+        },
+        {
+          name: "楼楼充值",
+          imgUrl: "czcz.png",
+          categoryId: 1000010,
+        },
+      ],
     };
   },
   components: {
@@ -54,6 +113,7 @@ export default {
 <style lang="less" scoped>
 @import "../common/style/mixin";
 .home {
+  // 吸顶头部样式
   .home-header {
     position: fixed;
     left: 0;
@@ -66,7 +126,7 @@ export default {
     font-size: 15px;
     color: #fff;
     z-index: 10000;
-    .nbmenu2 {
+    .icon-menu {
       color: @primary;
     }
     &.active {
@@ -111,6 +171,25 @@ export default {
       .van-icon-manager-o {
         font-size: 20px;
         vertical-align: -3px;
+      }
+    }
+  }
+
+  //分类栏目样式
+  .category-list {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-bottom: 13px;
+    div {
+      display: flex;
+      flex-direction: column;
+      width: 20%;
+      text-align: center;
+      img {
+        .wh(40px, 40px);
+        margin: 13px auto 8px auto;
       }
     }
   }
