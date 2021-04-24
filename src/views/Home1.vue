@@ -2,7 +2,7 @@
   <div class="home">
     <header class="home-header wrap">
       <router-link tag="i" to="./category"
-        ><i class="nbicon nbmenu2"></i
+        ><i class="iconfont icon-menu"></i
       ></router-link>
       <div class="header-search">
         <span class="app-name">楼楼商城</span>
@@ -18,39 +18,27 @@
         <van-icon name="manager-o" />
       </router-link>
     </header>
-    <swiper :list="swiperList"></swiper>
   </div>
 </template>
+
 <script>
 import { getLocal } from "@/common/js/utils";
-import swiper from "@/components/Swiper";
-import { getHome } from "../service/home";
-import { Toast } from "vant";
 export default {
   name: "Home",
   data() {
     return {
       isLogin: false,
-      swiperList: [],
     };
   },
-  components: {
-    swiper,
-  },
-  async mounted() {
+  mounted() {
     const token = getLocal("token");
     if (token) {
       this.isLogin = true;
     }
-    Toast.loading({
-      message: "加载中...",
-      forbidClick: true,
-    });
-    const { data } = await getHome();
-    this.swiperList = data.carousels;
   },
 };
 </script>
+
 <style lang="less" scoped>
 @import "../common/style/mixin";
 .home {
@@ -66,12 +54,12 @@ export default {
     font-size: 15px;
     color: #fff;
     z-index: 10000;
-    .nbmenu2 {
+    .icon-menu {
       color: @primary;
     }
     &.active {
       background: @primary;
-      .nbmenu2 {
+      .icon-menu {
         color: #fff;
       }
       .login {
