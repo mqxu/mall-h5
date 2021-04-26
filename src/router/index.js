@@ -84,6 +84,14 @@ const routes = [
     },
     component: () => import(/* webpackChunkName: "setting" */ '../views/Setting.vue'),
   },
+  {
+    path: '/product-list',
+    name: 'product-list',
+    component: () => import(/* webpackChunkName: "product-list" */ '../views/ProductList.vue'),
+    meta: {
+      index: 2
+    }
+  }
 ]
 
 const router = new VueRouter({

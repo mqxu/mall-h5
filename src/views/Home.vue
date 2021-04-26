@@ -169,6 +169,7 @@ export default {
     Toast.loading({
       message: "加载中...",
       forbidClick: true,
+      duration: 1500,
     });
     const { data } = await getHome();
     this.swiperList = data.carousels; //轮播图

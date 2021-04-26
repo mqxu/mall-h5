@@ -3,7 +3,7 @@
     <s-header :title="'我的'"></s-header>
     <div class="user-info">
       <div class="info">
-        <img src="../assets/me.jpg" />
+        <img :src="user.avatar" />
         <div class="user-desc">
           <span>昵称：{{ user.nickName }}</span>
           <span>登录名：{{ user.loginName }}</span>
