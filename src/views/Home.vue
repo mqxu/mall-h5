@@ -217,7 +217,6 @@ export default {
         color: #fff;
       }
     }
-
     .header-search {
       display: flex;
       .wh(74%, 20px);
@@ -253,7 +252,6 @@ export default {
       }
     }
   }
-
   //分类栏目样式
   .category-list {
     display: flex;
