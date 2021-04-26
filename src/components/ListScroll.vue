@@ -9,15 +9,15 @@ import BScroll from "better-scroll";
 export default {
   props: {
     /**
-     * 1 滚动的时候会派发 scroll 事件，会截流。
-     * 2 滚动的时候实时派发 scroll 事件，不会截流。
-     * 3 除了实时派发 scroll 事件，在 swipe 的情况下仍然能实时派发 scroll 事件
+     * 1 滚动的时候会派发scroll事件，会截流。
+     * 2 滚动的时候实时派发scroll事件，不会截流。
+     * 3 除了实时派发scroll事件，在swipe的情况下仍然能实时派发scroll事件
      */
     probeType: {
       type: Number,
       default: 1,
     },
-    // 点击列表是否派发 click 事件
+    // 点击列表是否派发click事件
     click: {
       type: Boolean,
       default: true,
@@ -52,25 +52,24 @@ export default {
       type: Boolean,
       default: false,
     },
-    // 当数据更新后，刷新 scroll 的延时
+    // 当数据更新后，刷新scroll的延时
     refreshDelay: {
       type: Number,
       default: 20,
     },
   },
   mounted() {
-    // 在 DOM 渲染完毕后初始化 better-scroll，大致做一个 20 毫秒的等待，确保 DOM 渲染完毕
+    // 在 DOM 渲染完毕后初始化 better-scroll
     setTimeout(() => {
       this.initScroll();
     }, 20);
   },
   methods: {
-    // 初始化滚动组件，拿不到 this.$refs.wrapper 代码不往下走
     initScroll() {
       if (!this.$refs.wrapper) {
         return;
       }
-      // better-scroll 初始化， 传入配置项参数
+      // better-scroll 初始化
       this.scroll = new BScroll(this.$refs.wrapper, {
         probeType: this.probeType,
         click: this.click,
