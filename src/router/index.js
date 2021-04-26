@@ -76,6 +76,14 @@ const routes = [
     },
     component: () => import(/* webpackChunkName: "address-edit" */ '../views/AddressEdit.vue'),
   },
+  {
+    path: '/setting',
+    name: 'setting',
+    meta: {
+      index: 2
+    },
+    component: () => import(/* webpackChunkName: "setting" */ '../views/Setting.vue'),
+  },
 ]
 
 const router = new VueRouter({
