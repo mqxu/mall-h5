@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+/src/utils/client.js
 
 
 # local env files

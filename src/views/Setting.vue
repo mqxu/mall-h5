@@ -1,5 +1,5 @@
 <template>
-  <div class="seting-box">
+  <div class="setting-box">
     <s-header :name="'账号管理'"></s-header>
     <div class="input-item">
       <van-field v-model="nickName" label="昵称" />
@@ -7,10 +7,10 @@
       <van-field v-model="password" type="password" label="修改密码" />
       <van-image
         round
-        width="80px"
-        height="80px"
+        width="60px"
+        height="60px"
         :src="avatar"
-        style="margin-left:10px;"
+        style="margin-left:20px;"
         @click="handleClick"
       ></van-image>
       <div style="display:none;">
@@ -41,6 +41,7 @@ import sHeader from "@/components/SimpleHeader";
 import { getUserInfo, editUserInfo, logout } from "../service/user";
 import { setLocal } from "@/common/js/utils";
 import { Toast } from "vant";
+import { getClient } from "../utils/client";
 export default {
   name: "Setting",
   components: {
@@ -71,6 +72,7 @@ export default {
       let _this = this;
       //确定选中的文件
       this.file = this.$refs.selectFile.files[0];
+      // 预览图片
       if (!e || !window.FileReader) return; // 判断是否支持FileReader
       let reader = new FileReader();
       reader.readAsDataURL(this.file); // 文件转换
@@ -78,44 +80,23 @@ export default {
         _this.avatar = this.result;
       };
     },
-    upload() {
-      // let OSS = require("ali-oss");
-      // let client = new OSS({
-      //   region: "oss-cn-hangzhou",
-      //   accessKeyId: "LTAI4G9dDHPToxFZeqPFjAbK",
-      //   accessKeySecret: "YrCmEl7ck8wkH3VdtlYamv9T2UER0H",
-      //   bucket: "mqxu-upload",
-      // });
-      // let _this = this;
-      // async function put() {
-      //   try {
-      //     let result = await client.put(_this.file.name, _this.file);
-      //     _this.avatar = result.url;
-      //   } catch (e) {
-      //     console.log(e);
-      //   }
-      // }
-      // put();
-    },
     async save() {
-      let OSS = require("ali-oss");
-      let client = new OSS({
-        region: "oss-cn-hangzhou",
-        accessKeyId: "***",
-        accessKeySecret: "***",
-        bucket: "mqxu-upload",
-      });
+      let _client = getClient();
       let _this = this;
       async function put() {
         try {
-          let result = await client.put(_this.file.name, _this.file);
+          //上传
+          let result = await _client.put(_this.file.name, _this.file);
+          //将上传结果（图片url）同步给头像更新
           _this.avatar = result.url;
+          //构造请求参数
           const params = {
             introduceSign: _this.introduceSign,
             nickName: _this.nickName,
             passwordMd5: _this.$md5(_this.password),
             avatar: _this.avatar,
           };
+          //请求接口，修改用户信息
           const { message } = await editUserInfo(params);
           if (message == "SUCCESS") {
             Toast.success("保存成功");
@@ -142,12 +123,13 @@ export default {
 .hidden {
   display: hidden;
 }
-.seting-box {
+.setting-box {
   .input-item {
     margin-top: 44px;
+    padding: 20px;
   }
   .save-btn {
-    width: 80%;
+    width: 90%;
     margin: 20px auto;
   }
 }

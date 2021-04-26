@@ -41,7 +41,7 @@
           :key="item.goodsId"
           @click="goToDetail(item)"
         >
-          <img :src="`http://localhost:8080${item.goodsCoverImg}`" />
+          <img :src="`http://121.43.231.185:8080${item.goodsCoverImg}`" />
           <div class="good-info">
             <p class="name">{{ item.goodsName }}</p>
             <p class="subtitle">{{ item.goodsIntro }}</p>
@@ -59,7 +59,7 @@
           :key="item.goodsId"
           @click="goToDetail(item)"
         >
-          <img :src="`http://localhost:8080${item.goodsCoverImg}`" />
+          <img :src="`http://121.43.231.185:8080${item.goodsCoverImg}`" />
           <div class="good-info">
             <p class="name">{{ item.goodsName }}</p>
             <p class="subtitle">{{ item.goodsIntro }}</p>
@@ -77,7 +77,7 @@
           :key="item.goodsId"
           @click="goToDetail(item)"
         >
-          <img :src="`http://localhost:8080${item.goodsCoverImg}`" />
+          <img :src="`http://121.43.231.185:8080${item.goodsCoverImg}`" />
           <div class="good-info">
             <p class="name">{{ item.goodsName }}</p>
             <p class="subtitle">{{ item.goodsIntro }}</p>
