@@ -136,6 +136,7 @@ export default {
           loginName: values.username,
           passwordMd5: this.$md5(values.password),
         });
+        console.log(data);
         setLocal("token", data.token);
         setLocal("userId", data.userId);
         window.location.href = "/";
