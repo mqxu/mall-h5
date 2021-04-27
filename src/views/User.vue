@@ -3,7 +3,13 @@
     <s-header :title="'我的'"></s-header>
     <div class="user-info">
       <div class="info">
-        <img :src="user.avatar" />
+        <img
+          :src="
+            user.avatar
+              ? user.avatar
+              : 'https://mqxu-upload.oss-cn-hangzhou.aliyuncs.com/avatar/default.jpg'
+          "
+        />
         <div class="user-desc">
           <span>昵称：{{ user.nickName }}</span>
           <span>登录名：{{ user.loginName }}</span>

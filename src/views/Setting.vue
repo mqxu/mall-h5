@@ -9,7 +9,11 @@
         round
         width="60px"
         height="60px"
-        :src="avatar"
+        :src="
+          avatar
+            ? avatar
+            : 'https://mqxu-upload.oss-cn-hangzhou.aliyuncs.com/avatar/default.jpg'
+        "
         style="margin-left:20px;"
         @click="handleClick"
       ></van-image>
