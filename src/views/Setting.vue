@@ -42,6 +42,7 @@ import { getUserInfo, editUserInfo, logout } from "../service/user";
 import { setLocal } from "@/common/js/utils";
 import { Toast } from "vant";
 import { getClient } from "../utils/client";
+import { renameFile } from "../utils/util";
 export default {
   name: "Setting",
   components: {
@@ -56,6 +57,7 @@ export default {
       file: {},
     };
   },
+  created() {},
   async mounted() {
     const { data } = await getUserInfo();
     // console.log(data);
@@ -68,7 +70,6 @@ export default {
       this.$refs.selectFile.click();
     },
     onChange(e) {
-      // console.log(e);
       let _this = this;
       //确定选中的文件
       this.file = this.$refs.selectFile.files[0];
@@ -82,11 +83,18 @@ export default {
     },
     async save() {
       let _client = getClient();
+      console.log(_client);
+      let prefix = _client.options.prefix;
+      const uploadFileName = renameFile(this.file.name);
+      console.log(uploadFileName);
       let _this = this;
       async function put() {
         try {
           //上传
-          let result = await _client.put(_this.file.name, _this.file);
+          let result = await _client.put(
+            `${prefix}/${uploadFileName}`,
+            _this.file
+          );
           //将上传结果（图片url）同步给头像更新
           _this.avatar = result.url;
           //构造请求参数
