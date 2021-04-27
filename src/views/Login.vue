@@ -136,7 +136,8 @@ export default {
           loginName: values.username,
           passwordMd5: this.$md5(values.password),
         });
-        setLocal("token", data);
+        setLocal("token", data.token);
+        setLocal("userId", data.userId);
         window.location.href = "/";
       } else {
         const { data } = await register({
